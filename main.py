@@ -1,16 +1,17 @@
-# This is a sample Python script.
+import pandas as pd
+import random
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+lst = ['robot'] * 10
+lst += ['human'] * 10
+random.shuffle(lst)
+data = pd.DataFrame({'whoAmI':lst})
+data.head()
+print(data)
+print()
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+data.loc[data['whoAmI'] == 'robot', 'robot'] = '1'
+data.loc[data['whoAmI'] != 'robot', 'robot'] = '0'
+data.loc[data['whoAmI'] == 'human', 'human'] = '1'
+data.loc[data['whoAmI'] != 'human', 'human'] = '0'
+data.drop('whoAmI', axis=1, inplace=True)
+print(data)
